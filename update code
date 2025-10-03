@@ -1,0 +1,48 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract DistanceCalculator {
+    // Fonction pour calculer la distance en kilomètres entre deux coordonnées GPS
+    function calculateDistance(
+        int256 lat1,
+        int256 lon1,
+        int256 lat2,
+        int256 lon2
+    ) public pure returns (uint256) {
+        // Convertir les degrés en radians
+        int256 R = 6371; // Rayon de la Terre en kilomètres
+        int256 dLat = toRadians(lat2 - lat1);
+        int256 dLon = toRadians(lon2 - lon1);
+
+        // Formule de Haversine
+        int256 a = sin(dLat / 2) * sin(dLat / 2) +
+                   cos(toRadians(lat1)) * cos(toRadians(lat2)) *
+                   sin(dLon / 2) * sin(dLon / 2);
+        int256 c = 2 * atan2(sqrt(a), sqrt(1 - a));
+
+        // Retourner la distance
+        return uint256(R * c);
+    }
+
+    // Fonction pour convertir les degrés en radians
+    function toRadians(int256 degrees) internal pure returns (int256) {
+        return degrees * 314159 / 180000;
+    }
+
+    // Approximation pour sin(x) et cos(x) (à compléter pour des calculs précis)
+    function sin(int256 x) internal pure returns (int256) {
+        return x; // Remplacer par une vraie implémentation
+    }
+
+    function cos(int256 x) internal pure returns (int256) {
+        return x; // Remplacer par une vraie implémentation
+    }
+
+    function atan2(int256 y, int256 x) internal pure returns (int256) {
+        return y; // Remplacer par une vraie implémentation
+    }
+
+    function sqrt(int256 x) internal pure returns (int256) {
+        return x; // Remplacer par une vraie implémentation
+    }
+}
